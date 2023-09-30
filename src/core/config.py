@@ -1,15 +1,15 @@
 import os
 from logging import config as logging_config
 from core.logger import LOGGING
-from pydantic import PostgresDsn, BaseSettings
+from pydantic import BaseSettings, PostgresDsn
 
 
 class AppSettings(BaseSettings):
-    app_title: str = 'Short_URL'
-    database_dsn: PostgresDsn = "postgresql+asyncpg://postgres:postgres@localhost:5432/postgres"
+    app_title: str
+    database_dsn: PostgresDsn
 
-    class Conffig:
-        env_file = '.env'
+    class Config:
+        env_file = ".env"
 
 
 app_settings = AppSettings()
