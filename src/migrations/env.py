@@ -11,8 +11,6 @@ from alembic import context
 from dotenv import load_dotenv
 from models import Base
 
-target_metadata = Base.metadata
-
 load_dotenv('.env')
 
 # this is the Alembic Config object, which provides
@@ -26,11 +24,12 @@ config.set_main_option('sqlalchemy.url', os.environ['DATABASE_DSN'])
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
+target_metadata = Base.metadata
+
 # add your model's MetaData object here
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-target_metadata = None
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:

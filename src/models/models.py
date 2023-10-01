@@ -10,5 +10,5 @@ class URl(Base):
     key = Column(String, unique=True, index=True)
     secret_key = Column(String, unique=True, index=True)
     target_url = Column(String, index=True)
-    is_active = Column(Boolean, default=True)
+    is_active = Column(Boolean, default=False)
     clicks = Column(Integer, default=0)
