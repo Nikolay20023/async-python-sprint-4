@@ -17,21 +17,21 @@ def raise_bad_request(message):
     raise HTTPException(status_code=400, detail=message)
 
 
-@router.post('/url')
+@router.post('/url', response_model=schemas.URLInfo)
 async def create_url(
-    target_url: schemas.URLBase,
+    url: schemas.URLBase,
     db: AsyncSession = Depends(get_session)
 ):
-    if not target_url:
+    if not url:
         raise_bad_request(message="Отсутсвует URL")
 
-    url = await keygen_url.create_random_key(5)
+    key = await keygen_url.create_random_key(5)
     admin_url = await keygen_url.create_random_key(8)
 
     data = {
         "secret_key": admin_url,
-        "target_url": str(target_url),
-        "key": url
+        "target_url": url.target_url,
+        "key": key
     }
 
     # obj_in = schemas.URLInfo(**dic)

@@ -14,5 +14,5 @@ class URL(URLBase):
 
 
 class URLInfo(URL):
-    url: str
-    admin_url: str
+    key: str
+    secret_key: str
