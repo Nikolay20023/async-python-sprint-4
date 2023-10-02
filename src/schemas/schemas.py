@@ -6,7 +6,7 @@ class URLBase(BaseModel):
 
 
 class URL(URLBase):
-    is_actibve: bool
+    is_active: bool
     clicks: int
 
     class Config:

@@ -5,8 +5,6 @@ from fastapi.encoders import jsonable_encoder
 from models.base import Base
 from sqlalchemy.future import select
 
-# from base import Repository
-
 
 ModelType = TypeVar("ModelType", bound=Base)
 CreateSchemaType = TypeVar("CreateSchemaType", bound=BaseModel)
