@@ -32,7 +32,14 @@ class UrlDB(
 
     async def get(self, db: AsyncSession, url_key: Any) -> Optional[ModelType]:
         statement = select(self._model).filter(
-            self._model.key == url_key, self._model.is_active
+            self._model.key == url_key
         )
         result = await db.execute(statement=statement)
-        return result
+        return result.scalar_one_or_none()
+
+    async def get_id(self, db: AsyncSession, id: Any) -> Optional[ModelType]:
+        statement = select(self._model).filter(
+            self._model.id == id
+        )
+        result = await db.execute(statement=statement)
+        return result.scalar_one_or_none()

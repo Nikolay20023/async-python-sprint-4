@@ -42,17 +42,8 @@ async def create_url(
 
 
 @router.get("/{url_key}")
-async def forward_to_target(
-    url_key: str,
-    request: Request,
-    db: AsyncSession = Depends(get_session)
-):
-    pass
-
-
-@router.get("/{url_key}")
 async def forward_to_target_url(
-    url_key,
+    url_key: str,
     request: Request,
     db: AsyncSession = Depends(get_session)
 ):
@@ -60,3 +51,14 @@ async def forward_to_target_url(
         return RedirectResponse(db_url.target_url)
     else:
         raise raise_bad_request(request)
+
+
+@router.get("/{url_id}", response_model=schemas.URL)
+async def get_url_by_id(
+    url_id: int,
+    db: AsyncSession = Depends(get_session)
+):
+    if db_url := await entity_crud.get_id(db=db, id=url_id):
+        return db_url
+    else:
+        raise raise_bad_request("Not found")

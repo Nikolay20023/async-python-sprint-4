@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 import uvicorn
 from fastapi.responses import ORJSONResponse
+from fastapi.middleware.httpsredirect import HTTPSRedirectMiddleware
+
 
 from api.v1 import base
 from core.config import AppSettings
@@ -19,6 +21,10 @@ app = FastAPI(
 
 
 app.include_router(base.router, prefix='/api/v1')
+
+app.add_middleware(
+    HTTPSRedirectMiddleware
+)
 
 
 if __name__ == '__main__':
