@@ -1,9 +1,9 @@
 
-fastapi==0.79.0
-orjson
+fastapi==0.103.2
+orjson==3.9.7
 pydantic==1.9.0
 uvicorn==0.18.2
-# uvloop
-tortoise-orm==0.17.3
+sqlalchemy==2.0.21
 asyncpg==0.26.0 
-
+alembic==1.12
+python-dotenv==1.0.0

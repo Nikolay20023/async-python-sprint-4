@@ -7,7 +7,7 @@ setting = AppSettings()
 
 
 engine = create_async_engine(
-    setting.database_dsn, echo=True, future=True
+    setting.database_dsn, echo=setting.echo, future=True
 )
 
 async_session = sessionmaker(

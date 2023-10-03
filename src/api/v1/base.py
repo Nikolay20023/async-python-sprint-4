@@ -8,9 +8,12 @@ from db.db import get_session
 import api.v1.keygen_url as keygen_url
 from services.entity import entity_crud
 
+
 router = APIRouter()
 
 setting = AppSettings()
+
+URL_ROOT = "http://127.0.0.1:8000/api/v1/"
 
 
 def raise_bad_request(message):
@@ -29,9 +32,9 @@ async def create_url(
     admin_url = await keygen_url.create_random_key(8)
 
     data = {
-        "secret_key": admin_url,
+        "secret_key": URL_ROOT + admin_url,
         "target_url": url.target_url,
-        "key": key
+        "key": URL_ROOT + key
     }
 
     # obj_in = schemas.URLInfo(**dic)

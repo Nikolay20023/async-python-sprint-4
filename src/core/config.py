@@ -5,6 +5,10 @@ from pydantic import BaseSettings, PostgresDsn
 
 
 class AppSettings(BaseSettings):
+    project_name: str = "project_name"
+    project_host: str = ...
+    project_port: int = ...
+    echo: bool = True
     app_title: str
     database_dsn: PostgresDsn
 
@@ -15,8 +19,5 @@ class AppSettings(BaseSettings):
 app_settings = AppSettings()
 
 logging_config.dictConfig(LOGGING)
-PROJECT_NAME = os.getenv('PROGECT_NAME', 'library')
-PROJECT_HOST = os.getenv('PROJECT_HOST', '0.0.0.0')
-PROJECT_PORT = int(os.getenv('PROJECT_ROOT', '8000'))
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

@@ -27,7 +27,6 @@ class UrlDB(
         db_obj = self._model(**obj_in_data)
         db.add(db_obj)
         await db.commit()
-        await db.refresh(db_obj)
         return db_obj
 
     async def get(self, db: AsyncSession, url_key: Any) -> Optional[ModelType]:
