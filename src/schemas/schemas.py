@@ -16,3 +16,7 @@ class URL(URLBase):
 class URLInfo(URL):
     key: str
     secret_key: str
+
+
+class IP(BaseModel):
+    ip: str

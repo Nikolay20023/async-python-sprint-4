@@ -4,6 +4,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi.encoders import jsonable_encoder
 from models.base import Base
 from sqlalchemy.future import select
+from base import Repository
 
 
 ModelType = TypeVar("ModelType", bound=Base)
@@ -12,6 +13,7 @@ UpdateSchemaType = TypeVar("UpdateSchemaType", bound=BaseModel)
 
 
 class UrlDB(
+    Repository,
     Generic[ModelType, CreateSchemaType, UpdateSchemaType]
 ):
     def __init__(self, model: Type[ModelType]) -> None:
@@ -42,3 +44,15 @@ class UrlDB(
         )
         result = await db.execute(statement=statement)
         return result.scalar_one_or_none()
+
+    async def delete(
+        self,
+        db: AsyncSession,
+        *,
+        target_url: str
+    ):
+        statement = select(self._model).filter(
+            self._model.target_url == target_url
+        )
+        result = await db.delete(statement)
+        return result
